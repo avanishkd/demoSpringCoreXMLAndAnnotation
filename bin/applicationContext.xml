@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="myCard" class="com.mindtree.spring.model.ATMCard"></bean>
+	
+	<!-- commented this to demo autowire 
+	<bean id="myCreditCard" class="com.mindtree.spring.model.CreditCard"></bean> -->
+
+<!-- bean name should be same as property name for autowiring by name -->
+<bean id="creditCard" class="com.mindtree.spring.model.CreditCard"></bean>
+<!-- using constructor injection  -->
+	<bean id="myAccount" class="com.mindtree.spring.model.SavingsAccount">
+		<constructor-arg ref="myCard" />
+	</bean>
+	
+	<!-- using setter injection -->
+	<bean id="myCurrentAccount" class="com.mindtree.spring.model.CurrentAccount" 
+	autowire="byName"
+	scope="prototype"
+	init-method="onInit"
+	destroy-method="onDestroy">
+<!-- 		<property name="creditCard" ref="myCreditCard" /> -->
+	</bean>
+</beans>
